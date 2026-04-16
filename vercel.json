@@ -4,7 +4,7 @@
   "framework": null,
   "functions": {
     "api/**/*.py": {
-      "runtime": "python@3.9"
+      "runtime": "@vercel/python"
     }
   }
 }
