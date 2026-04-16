@@ -44,7 +44,10 @@ const HomePage = () => {
               <span>Improved support connection after intervention</span>
             </div>
           </div>
-          <Button onClick={() => navigate('/input')}>Start Assessment</Button>
+          <div className={styles.heroActions}>
+            <Button onClick={() => navigate('/admin-dashboard')}>Open NGO Admin Dashboard</Button>
+            <Button variant="ghost" onClick={() => navigate('/input')}>Start Assessment</Button>
+          </div>
         </div>
         <div className={styles.heroVisual}>
           <div className={styles.heroGlow} />

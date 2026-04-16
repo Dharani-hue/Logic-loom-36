@@ -5,10 +5,11 @@ import { UserRole } from '../types';
 
 interface NavbarProps {
   role: UserRole | null;
+  userName?: string | null;
   onLogout: () => void;
 }
 
-const Navbar = ({ role, onLogout }: NavbarProps) => {
+const Navbar = ({ role, userName, onLogout }: NavbarProps) => {
   const navigate = useNavigate();
 
   return (
@@ -23,6 +24,9 @@ const Navbar = ({ role, onLogout }: NavbarProps) => {
             <NavLink className={({ isActive }) => (isActive ? styles.active : '')} to="/home">
               Home
             </NavLink>
+            <NavLink className={({ isActive }) => (isActive ? styles.active : '')} to="/admin-dashboard">
+              Admin Dashboard
+            </NavLink>
             <NavLink className={({ isActive }) => (isActive ? styles.active : '')} to="/input">
               Input Panel
             </NavLink>
@@ -35,6 +39,7 @@ const Navbar = ({ role, onLogout }: NavbarProps) => {
         )}
       </nav>
       <div className={styles.actions}>
+        {userName ? <span className={styles.userLabel}>Hi, {userName}</span> : null}
         <Button variant="ghost" onClick={() => { onLogout(); navigate('/login'); }}>
           Logout
         </Button>

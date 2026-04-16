@@ -4,6 +4,8 @@ from pydantic import BaseModel
 from openai import OpenAI
 import os
 from dotenv import load_dotenv
+from pathlib import Path
+import json
 
 load_dotenv()
 
@@ -43,6 +45,43 @@ class AssessmentResult(BaseModel):
     summary: str
     recommendations: list
     alert: str = None
+
+class ProfileInput(BaseModel):
+    name: str
+    age: str
+    gender: str
+    location: str
+    familyContact: str
+    appetite: str
+    mood: str
+    mobility: str
+    sleepQuality: str
+    lonelinessScore: int
+    notes: str
+
+class ElderlyProfile(ProfileInput):
+    id: str
+    risk: str
+    createdAt: str
+
+DATA_DIR = Path(__file__).resolve().parent / 'data'
+PROFILE_DB = DATA_DIR / 'profiles.json'
+
+DATA_DIR.mkdir(exist_ok=True)
+if not PROFILE_DB.exists():
+    PROFILE_DB.write_text('[]', encoding='utf-8')
+
+
+def load_profiles() -> list[ElderlyProfile]:
+    try:
+        raw = PROFILE_DB.read_text(encoding='utf-8')
+        return [ElderlyProfile(**item) for item in json.loads(raw or '[]')]
+    except Exception:
+        return []
+
+
+def save_profiles(profiles: list[ElderlyProfile]) -> None:
+    PROFILE_DB.write_text(json.dumps([profile.dict() for profile in profiles], indent=2), encoding='utf-8')
 
 @app.get("/health")
 async def health_check():
@@ -226,6 +265,39 @@ async def get_recommendations(risk_level: str):
                 "Monitor for any changes"
             ]
         }
+
+@app.get('/api/profiles', response_model=list[ElderlyProfile])
+async def list_profiles(familyContact: str | None = None):
+    """Return saved geriatric profiles."""
+    profiles = load_profiles()
+    if familyContact:
+        return [profile for profile in profiles if profile.familyContact.strip().lower() == familyContact.strip().lower()]
+    return profiles
+
+from datetime import datetime
+
+@app.post('/api/profiles', response_model=ElderlyProfile)
+async def create_profile(profile: ProfileInput):
+    """Create and persist a new geriatric profile."""
+    profiles = load_profiles()
+    now = datetime.utcnow()
+    new_profile = ElderlyProfile(
+        id=f"{int(now.timestamp())}-{len(profiles) + 1}",
+        risk=assess_profile_risk(profile),
+        createdAt=now.isoformat(timespec='seconds') + 'Z',
+        **profile.dict()
+    )
+    profiles.insert(0, new_profile)
+    save_profiles(profiles)
+    return new_profile
+
+
+def assess_profile_risk(profile: ProfileInput) -> str:
+    if profile.lonelinessScore >= 16 or profile.mobility == 'Limited' or profile.appetite == 'Poor':
+        return 'High'
+    if profile.lonelinessScore >= 12 or profile.mobility == 'Reduced' or profile.appetite == 'Fair':
+        return 'Medium'
+    return 'Low'
 
 if __name__ == "__main__":
     import uvicorn

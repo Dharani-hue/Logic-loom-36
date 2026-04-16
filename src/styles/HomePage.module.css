@@ -16,6 +16,12 @@
   gap: 22px;
 }
 
+.heroActions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
 .mission {
   color: #8b5cf6;
   font-weight: 700;

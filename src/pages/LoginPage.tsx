@@ -6,7 +6,7 @@ import styles from '../styles/LoginPage.module.css';
 import { UserRole } from '../types';
 
 interface LoginPageProps {
-  onLogin: (role: UserRole) => void;
+  onLogin: (role: UserRole, username: string) => void;
 }
 
 const LoginPage = ({ onLogin }: LoginPageProps) => {
@@ -24,7 +24,7 @@ const LoginPage = ({ onLogin }: LoginPageProps) => {
     }
 
     setError('');
-    onLogin(role);
+    onLogin(role, username.trim());
     navigate(role === 'ngo' ? '/home' : '/family');
   };
 
