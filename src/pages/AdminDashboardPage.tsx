@@ -16,6 +16,11 @@ const defaultForm: ProfileInput = {
   mobility: 'Stable',
   sleepQuality: 'Good',
   lonelinessScore: 10,
+  meals: '',
+  outings: '',
+  activities: '',
+  interactions: '',
+  socialConnections: '',
   notes: '',
 };
 
@@ -73,6 +78,11 @@ const AdminDashboardPage = () => {
         mobility: profile.mobility,
         sleepQuality: profile.sleepQuality,
         lonelinessScore: profile.lonelinessScore,
+        meals: profile.meals,
+        outings: profile.outings,
+        activities: profile.activities,
+        interactions: profile.interactions,
+        socialConnections: profile.socialConnections,
         notes: profile.notes,
       });
     }
@@ -260,6 +270,57 @@ const AdminDashboardPage = () => {
                 <span className={styles.rangeValue}>{form.lonelinessScore}</span>
               </label>
             </div>
+
+            <div className={styles.fieldGroup}>
+              <label>
+                Meals
+                <select value={form.meals} onChange={(event) => handleChange('meals', event.target.value)}>
+                  <option value="Good">Good</option>
+                  <option value="Fair">Fair</option>
+                  <option value="Poor">Poor</option>
+                </select>
+              </label>
+              <label>
+                Outings
+                <input
+                  type="text"
+                  value={form.outings}
+                  onChange={(event) => handleChange('outings', event.target.value)}
+                  placeholder="e.g. 2 times this week"
+                />
+              </label>
+            </div>
+
+            <div className={styles.fieldGroup}>
+              <label>
+                Activities
+                <input
+                  type="text"
+                  value={form.activities}
+                  onChange={(event) => handleChange('activities', event.target.value)}
+                  placeholder="e.g. reading, walking"
+                />
+              </label>
+              <label>
+                Interactions
+                <input
+                  type="text"
+                  value={form.interactions}
+                  onChange={(event) => handleChange('interactions', event.target.value)}
+                  placeholder="e.g. 5 per day"
+                />
+              </label>
+            </div>
+
+            <label>
+              Social Connections
+              <input
+                type="text"
+                value={form.socialConnections}
+                onChange={(event) => handleChange('socialConnections', event.target.value)}
+                placeholder="e.g. family visits, friends"
+              />
+            </label>
 
             <label className={styles.fullWidth}>
               Notes / Observations

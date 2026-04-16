@@ -57,6 +57,11 @@ class ProfileInput(BaseModel):
     mobility: str
     sleepQuality: str
     lonelinessScore: int
+    meals: str
+    outings: str
+    activities: str
+    interactions: str
+    socialConnections: str
     notes: str
 
 class ElderlyProfile(ProfileInput):
@@ -311,9 +316,18 @@ async def update_profile(profile_id: str, profile: ProfileInput):
 
 
 def assess_profile_risk(profile: ProfileInput) -> str:
-    if profile.lonelinessScore >= 16 or profile.mobility == 'Limited' or profile.appetite == 'Poor':
+    if (profile.lonelinessScore >= 16 or 
+        profile.mobility == 'Limited' or 
+        profile.appetite == 'Poor' or
+        profile.meals == 'Poor' or
+        int(profile.interactions or 0) < 3 or
+        profile.outings == 'None'):
         return 'High'
-    if profile.lonelinessScore >= 12 or profile.mobility == 'Reduced' or profile.appetite == 'Fair':
+    if (profile.lonelinessScore >= 12 or 
+        profile.mobility == 'Reduced' or 
+        profile.appetite == 'Fair' or
+        profile.meals == 'Fair' or
+        int(profile.interactions or 0) < 7):
         return 'Medium'
     return 'Low'
 

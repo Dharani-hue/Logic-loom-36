@@ -146,6 +146,11 @@ const FamilyDashboardPage = ({ familyUsername }: FamilyDashboardPageProps) => {
                 <span>Appetite: {activeProfile.appetite}</span>
                 <span>Sleep quality: {activeProfile.sleepQuality}</span>
                 <span>Loneliness score: {activeProfile.lonelinessScore}</span>
+                <span>Meals: {activeProfile.meals}</span>
+                <span>Outings: {activeProfile.outings}</span>
+                <span>Activities: {activeProfile.activities}</span>
+                <span>Interactions: {activeProfile.interactions}</span>
+                <span>Social connections: {activeProfile.socialConnections}</span>
               </div>
               <div className={styles.profileNotes}>
                 <h4>Care notes</h4>

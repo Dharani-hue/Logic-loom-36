@@ -11,6 +11,11 @@ export interface ProfileInput {
   mobility: string;
   sleepQuality: string;
   lonelinessScore: number;
+  meals: string;
+  outings: string;
+  activities: string;
+  interactions: string;
+  socialConnections: string;
   notes: string;
 }
 
