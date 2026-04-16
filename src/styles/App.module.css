@@ -1,0 +1,20 @@
+.appShell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: inherit;
+}
+
+.pageCanvas {
+  width: 100%;
+  flex: 1;
+  padding: 28px;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .pageCanvas {
+    padding: 16px;
+  }
+}

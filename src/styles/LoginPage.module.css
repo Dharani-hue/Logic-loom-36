@@ -1,0 +1,82 @@
+.loginPage {
+  min-height: calc(100vh - 32px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+}
+
+.loginCard {
+  width: min(520px, 100%);
+}
+
+.intro {
+  margin-bottom: 26px;
+}
+
+.tiny {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: #8b5cf6;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0 0 14px;
+  font-size: clamp(2rem, 3.2vw, 2.8rem);
+  line-height: 1.02;
+}
+
+p {
+  margin: 0;
+  color: #475569;
+  line-height: 1.7;
+}
+
+.form {
+  display: grid;
+  gap: 18px;
+}
+
+label {
+  display: grid;
+  gap: 10px;
+  color: #475569;
+  font-weight: 500;
+}
+
+input,
+select,
+textarea {
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: rgba(255, 255, 255, 0.86);
+  border-radius: 18px;
+  padding: 14px 16px;
+  color: #0f172a;
+  outline: none;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: rgba(139, 92, 246, 0.5);
+  box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.16);
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.error {
+  margin: 0;
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.submitButton {
+  width: 100%;
+}

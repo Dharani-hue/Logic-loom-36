@@ -1,0 +1,322 @@
+.familyPage {
+  width: min(1400px, 100%);
+  display: grid;
+  gap: 24px;
+}
+
+.profileSection {
+  width: 100%;
+}
+
+.profileCard {
+  background: linear-gradient(135deg, rgba(167, 139, 250, 0.08), rgba(125, 211, 252, 0.08)) !important;
+  border: 1px solid rgba(167, 139, 250, 0.25) !important;
+}
+
+.profileHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.profileInfo h2 {
+  margin: 0 0 8px;
+  font-size: 1.8rem;
+  color: #1e293b;
+}
+
+.profileInfo p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+.profileStatus {
+  display: flex;
+  align-items: center;
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.conditionCard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.conditionContent {
+  display: grid;
+  gap: 14px;
+}
+
+.metric {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.metric .label {
+  color: #64748b;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.metric .value {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.insight {
+  padding: 12px 14px;
+  background: rgba(167, 139, 250, 0.08);
+  border-radius: 14px;
+  border-left: 3px solid #8b5cf6;
+  margin: 0;
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+.activitiesCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.activityList {
+  display: grid;
+  gap: 12px;
+}
+
+.activityItem {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: 12px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.activityTime {
+  color: #8b5cf6;
+  font-weight: 600;
+}
+
+.activityDesc {
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.activityMood {
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+.engagementSection {
+  width: 100%;
+}
+
+.metricsCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.metricsList {
+  display: grid;
+  gap: 18px;
+}
+
+.metricBar {
+  display: grid;
+  gap: 8px;
+}
+
+.metricLabel {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #1e293b;
+}
+
+.metricLabel span:first-child {
+  font-weight: 600;
+}
+
+.metricValue {
+  color: #8b5cf6;
+  font-weight: 700;
+}
+
+.progressBar {
+  height: 8px;
+  background: rgba(148, 163, 184, 0.15);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background: linear-gradient(90deg, #7dd3fc, #86efac);
+  transition: width 0.5s ease;
+  border-radius: 999px;
+}
+
+.target {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.trendSection {
+  width: 100%;
+}
+
+.trendCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.actionGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.recommendationCard {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.actionList {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.actionItem {
+  padding: 12px 14px;
+  background: rgba(167, 139, 250, 0.06);
+  border-radius: 14px;
+  border-left: 3px solid #8b5cf6;
+  color: #1e293b;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.actionNote {
+  padding: 12px 14px;
+  background: rgba(56, 189, 248, 0.08);
+  border-radius: 14px;
+  border-left: 3px solid #7dd3fc;
+  margin: 0;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.alertsCard {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.alertList {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.alertItem {
+  padding: 12px 14px;
+  background: rgba(239, 68, 68, 0.08);
+  border-radius: 14px;
+  border-left: 3px solid #ef4444;
+  color: #7f1d1d;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.insightsSection {
+  width: 100%;
+}
+
+.insightCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.insightContent {
+  display: grid;
+  gap: 16px;
+}
+
+.insightContent h4 {
+  margin: 0;
+  color: #1e293b;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.insightContent p {
+  margin: 0;
+  color: #475569;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.insightContent ul {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 8px;
+  color: #475569;
+}
+
+.insightContent li {
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.footerInfo {
+  text-align: center;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.footerInfo p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 1000px) {
+  .metricsGrid,
+  .actionGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .activityItem {
+    grid-template-columns: 70px 1fr;
+  }
+
+  .activityMood {
+    grid-column: 2;
+    justify-self: flex-end;
+  }
+}
+
