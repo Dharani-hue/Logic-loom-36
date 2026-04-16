@@ -1,37 +1,17 @@
 import json
-from _db import SessionLocal, ElderlyProfileDB, assess_profile_risk
 from datetime import datetime
 
+# In-memory storage for serverless functions
+profiles_store = {}
+
 def handler(request):
+    global profiles_store
+    
     if request.method == 'GET':
-        familyContact = request.query.get('familyContact') if hasattr(request, 'query') else None
-        db = SessionLocal()
-        query = db.query(ElderlyProfileDB)
+        familyContact = request.args.get('familyContact') if hasattr(request, 'args') else None
+        result = list(profiles_store.values())
         if familyContact:
-            query = query.filter(ElderlyProfileDB.familyContact.ilike(f'%{familyContact}%'))
-        profiles = query.all()
-        db.close()
-        result = [{
-            'id': p.id,
-            'name': p.name,
-            'age': p.age,
-            'gender': p.gender,
-            'location': p.location,
-            'familyContact': p.familyContact,
-            'appetite': p.appetite,
-            'mood': p.mood,
-            'mobility': p.mobility,
-            'sleepQuality': p.sleepQuality,
-            'lonelinessScore': p.lonelinessScore,
-            'meals': p.meals,
-            'outings': p.outings,
-            'activities': p.activities,
-            'interactions': p.interactions,
-            'socialConnections': p.socialConnections,
-            'notes': p.notes,
-            'risk': p.risk,
-            'createdAt': p.createdAt.isoformat() + 'Z' if p.createdAt else None
-        } for p in profiles]
+            result = [p for p in result if p['familyContact'].lower().strip() == familyContact.lower().strip()]
         return {
             'statusCode': 200,
             'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET,POST,OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type'},
@@ -39,60 +19,35 @@ def handler(request):
         }
     elif request.method == 'POST':
         data = json.loads(request.body)
-        db = SessionLocal()
         now = datetime.utcnow()
-        new_id = f"{int(now.timestamp())}-{len(db.query(ElderlyProfileDB).all()) + 1}"
-        risk = assess_profile_risk(type('Profile', (), data)())
-        db_profile = ElderlyProfileDB(
-            id=new_id,
-            name=data['name'],
-            age=data['age'],
-            gender=data['gender'],
-            location=data['location'],
-            familyContact=data['familyContact'],
-            appetite=data['appetite'],
-            mood=data['mood'],
-            mobility=data['mobility'],
-            sleepQuality=data['sleepQuality'],
-            lonelinessScore=data['lonelinessScore'],
-            meals=data.get('meals', ''),
-            outings=data.get('outings', ''),
-            activities=data.get('activities', ''),
-            interactions=data.get('interactions', ''),
-            socialConnections=data.get('socialConnections', ''),
-            notes=data['notes'],
-            risk=risk,
-            createdAt=now
-        )
-        db.add(db_profile)
-        db.commit()
-        db.refresh(db_profile)
-        db.close()
-        result = {
-            'id': db_profile.id,
-            'name': db_profile.name,
-            'age': db_profile.age,
-            'gender': db_profile.gender,
-            'location': db_profile.location,
-            'familyContact': db_profile.familyContact,
-            'appetite': db_profile.appetite,
-            'mood': db_profile.mood,
-            'mobility': db_profile.mobility,
-            'sleepQuality': db_profile.sleepQuality,
-            'lonelinessScore': db_profile.lonelinessScore,
-            'meals': db_profile.meals,
-            'outings': db_profile.outings,
-            'activities': db_profile.activities,
-            'interactions': db_profile.interactions,
-            'socialConnections': db_profile.socialConnections,
-            'notes': db_profile.notes,
-            'risk': db_profile.risk,
-            'createdAt': db_profile.createdAt.isoformat() + 'Z'
+        new_id = f"{int(now.timestamp())}-{len(profiles_store) + 1}"
+        
+        profile = {
+            'id': new_id,
+            'name': data['name'],
+            'age': data['age'],
+            'gender': data['gender'],
+            'location': data['location'],
+            'familyContact': data['familyContact'],
+            'appetite': data['appetite'],
+            'mood': data['mood'],
+            'mobility': data['mobility'],
+            'sleepQuality': data['sleepQuality'],
+            'lonelinessScore': data['lonelinessScore'],
+            'meals': data.get('meals', ''),
+            'outings': data.get('outings', ''),
+            'activities': data.get('activities', ''),
+            'interactions': data.get('interactions', ''),
+            'socialConnections': data.get('socialConnections', ''),
+            'notes': data['notes'],
+            'risk': assess_risk(data),
+            'createdAt': now.isoformat() + 'Z'
         }
+        profiles_store[new_id] = profile
         return {
             'statusCode': 200,
             'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET,POST,OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type'},
-            'body': json.dumps(result)
+            'body': json.dumps(profile)
         }
     else:
         return {
@@ -100,3 +55,11 @@ def handler(request):
             'headers': {'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET,POST,OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type'},
             'body': 'Method not allowed'
         }
+
+def assess_risk(data):
+    score = data.get('lonelinessScore', 10)
+    if score >= 16 or data.get('mobility') == 'Limited' or data.get('appetite') == 'Poor':
+        return 'High'
+    if score >= 12 or data.get('mobility') == 'Reduced' or data.get('appetite') == 'Fair':
+        return 'Medium'
+    return 'Low'
