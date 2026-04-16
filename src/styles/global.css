@@ -2,10 +2,12 @@
 
 :root {
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  color: #1e293b;
-  background: radial-gradient(circle at top left, rgba(192, 132, 252, 0.14), transparent 25%),
-    radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.12), transparent 22%),
-    linear-gradient(180deg, #faf8ff 0%, #f0f4ff 100%);
+  color: #0f172a;
+  background: radial-gradient(circle at top left, rgba(129, 140, 248, 0.18), transparent 22%),
+    radial-gradient(circle at bottom right, rgba(34, 211, 238, 0.12), transparent 20%),
+    linear-gradient(180deg, #f8fafc 0%, #eff6ff 100%);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
 }
 
 * {
@@ -20,8 +22,10 @@ body,
 
 body {
   margin: 0;
-  background: linear-gradient(180deg, #faf8ff 0%, #f0f4ff 100%);
-  color: #1e293b;
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+  color: #0f172a;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -40,15 +44,21 @@ button {
   cursor: pointer;
 }
 
-::selection {
-  background: rgba(192, 132, 252, 0.2);
+input,
+textarea,
+select {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
 }
 
-/* Smooth transitions for focus states */
+::selection {
+  background: rgba(129, 140, 248, 0.18);
+}
+
 input:focus,
 select:focus,
 textarea:focus,
 button:focus {
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.16);
 }
 

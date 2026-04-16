@@ -8,13 +8,20 @@
 .pageCanvas {
   width: 100%;
   flex: 1;
-  padding: 28px;
+  padding: 32px 24px;
   display: flex;
   justify-content: center;
 }
 
-@media (max-width: 768px) {
+.pageCanvas::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 980px) {
   .pageCanvas {
-    padding: 16px;
+    padding: 22px 16px;
   }
 }

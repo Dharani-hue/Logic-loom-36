@@ -1,16 +1,16 @@
 .navbar {
   width: min(1400px, 100%);
-  margin: 0 auto 20px;
-  padding: 18px 24px;
+  margin: 0 auto 24px;
+  padding: 20px 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  border-radius: 24px;
-  border: 1px solid rgba(226, 232, 240, 0.28);
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(18px);
-  box-shadow: 0 18px 40px rgba(148, 163, 184, 0.12);
+  gap: 18px;
+  border-radius: 28px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
   position: sticky;
   top: 16px;
   z-index: 10;
@@ -19,30 +19,30 @@
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   font-weight: 800;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .brand strong {
-  color: #8b5cf6;
+  color: #7c3aed;
 }
 
 .links {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 22px;
   flex-wrap: wrap;
 }
 
 .links a {
   color: #334155;
-  transition: color 0.25s ease, transform 0.25s ease;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .links a:hover,
 .links a.active {
-  color: #8b5cf6;
+  color: #7c3aed;
   transform: translateY(-1px);
 }
 
