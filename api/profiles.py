@@ -4,7 +4,7 @@ from datetime import datetime
 
 def handler(request):
     if request.method == 'GET':
-        familyContact = request.args.get('familyContact') if hasattr(request, 'args') else None
+        familyContact = request.query.get('familyContact') if hasattr(request, 'query') else None
         db = SessionLocal()
         query = db.query(ElderlyProfileDB)
         if familyContact:
