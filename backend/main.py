@@ -6,6 +6,10 @@ import os
 from dotenv import load_dotenv
 from pathlib import Path
 import json
+from sqlalchemy import create_engine, Column, String, Integer, DateTime
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+from datetime import datetime
 
 load_dotenv()
 
